@@ -10,9 +10,17 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: false
   liquibase:
     change-log: classpath:db/changelog-main.json
 server:
   port: 8080
+
+### SQS ###
+sqs:
+  url: http://localhost:4566/000000000000
+  partial-payment: ${sqs.url}/partial-payments
+  full-payment: ${sqs.url}/full-payments
+  over-payment: ${sqs.url}/over-payments
+  payment-response: ${sqs.url}/payment-responses

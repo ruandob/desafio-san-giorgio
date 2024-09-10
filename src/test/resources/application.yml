@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:sangiorgio
+    driverClassName: org.h2.Driver
+    username: sa
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
