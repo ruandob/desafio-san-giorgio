@@ -48,7 +48,7 @@ O banco de dados utilizado é o PostgreSQL.
 
 ### Vendedores
 
-- **POST /sellers**
+- **POST /api/sellers**
    - **Descrição:** Cria um novo vendedor.
    - **Body:**
      ```json
@@ -64,7 +64,7 @@ O banco de dados utilizado é o PostgreSQL.
      }
      ```
 
-- **GET /sellers**
+- **GET /api/sellers**
    - **Descrição:** Retorna uma lista de todos os vendedores.
    - **Resposta:**
      ```json
@@ -76,7 +76,7 @@ O banco de dados utilizado é o PostgreSQL.
      ]
      ```
 
-- **GET /sellers/{uuid}**
+- **GET /api/sellers/{uuid}**
    - **Descrição:** Retorna um vendedor específico pelo ID.
    - **Resposta:**
      ```json
