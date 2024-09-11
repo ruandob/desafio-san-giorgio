@@ -21,6 +21,26 @@ public class NamingConventionTest {
                     .haveSimpleNameContaining("Controller");
 
     @ArchTest
+    ArchRule requests_should_be_suffixed =
+            classes()
+                    .that()
+                    .areNotAnonymousClasses()
+                    .and()
+                    .resideInAPackage("..api..requests")
+                    .should()
+                    .haveSimpleNameContaining("Request");
+
+    @ArchTest
+    ArchRule responses_should_be_suffixed =
+            classes()
+                    .that()
+                    .areNotAnonymousClasses()
+                    .and()
+                    .resideInAPackage("..api..responses")
+                    .should()
+                    .haveSimpleNameContaining("Response");
+
+    @ArchTest
     ArchRule middlewares_should_be_suffixed =
             classes()
                     .that()

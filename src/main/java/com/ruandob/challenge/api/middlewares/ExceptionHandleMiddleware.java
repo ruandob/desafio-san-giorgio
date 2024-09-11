@@ -31,6 +31,8 @@ public class ExceptionHandleMiddleware {
 
     private static final String MESSAGE = "message";
 
+    private static final String UNHANDLED_EXCEPTION = "unhandled_exception";
+
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -97,6 +99,16 @@ public class ExceptionHandleMiddleware {
     public ProblemDetail handleSqsServiceException(SqsServiceException ex) {
         var problemDetail = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
         problemDetail.setProperty(MESSAGE, ex.getMessage());
+        return problemDetail;
+    }
+
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ProblemDetail handleException(Exception ex) {
+        log.error("[INTERNAL_SERVER_ERRO] Ex: {}", ex.getMessage());
+        var problemDetail = ProblemDetail.forStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        problemDetail.setProperty(UNHANDLED_EXCEPTION, ex.getMessage());
         return problemDetail;
     }
 

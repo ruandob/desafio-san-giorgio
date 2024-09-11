@@ -27,7 +27,6 @@ public class ChargeEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", columnDefinition = "CHAR(36)")
     private UUID id;
 
     @Column(name = "value", precision = 38, scale = 2)

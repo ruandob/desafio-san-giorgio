@@ -20,7 +20,7 @@ public class GetByIdChargeProvider implements GetByIdChargeGateway {
     @Override
     public ChargeDomain getById(String id) {
         var charge = repository.findById(UUID.fromString(id))
-                .orElseThrow(() -> new NotFoundException("cobrança"));
+                .orElseThrow(() -> new NotFoundException("cobrança", id));
         return mapper.toDomain(charge);
     }
 }

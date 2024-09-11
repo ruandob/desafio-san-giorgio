@@ -70,7 +70,7 @@ class SqsPaymentListenerIntegrationTest {
     @Test
     @DisplayName("Deve processar mensagens das filas SQS")
     void shouldProcessMessagesFromQueues() throws JsonProcessingException {
-        var payment = objectMapper.writeValueAsString(new PaymentItemDomain(UUID.randomUUID().toString(), UUID.randomUUID().toString(), BigDecimal.TEN, null));
+        var payment = objectMapper.writeValueAsString(new PaymentItemDomain(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), BigDecimal.TEN, null));
 
         amazonSQSClient.sendMessage(PARTIAL, payment);
         amazonSQSClient.sendMessage(FULL, payment);

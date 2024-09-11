@@ -26,7 +26,7 @@ class SendSqsPaymentProviderTest {
     @Test
     @DisplayName("Deve enviar uma mensagem para o serviço SQS")
     void shouldSendMessageToSqsService() {
-        var paymentItemDomain = new PaymentItemDomain("chargeId", "id", BigDecimal.TEN, "status");
+        var paymentItemDomain = new PaymentItemDomain("sellerId","chargeId", "id", BigDecimal.TEN, "status");
 
         sendSqsPaymentProvider.send("queueName", paymentItemDomain);
 

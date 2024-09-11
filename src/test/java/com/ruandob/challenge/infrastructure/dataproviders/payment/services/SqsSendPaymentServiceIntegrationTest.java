@@ -72,6 +72,6 @@ public class SqsSendPaymentServiceIntegrationTest {
     }
 
     private PaymentItemDomain getPaymentDomain() {
-        return new PaymentItemDomain(UUID.randomUUID().toString(), UUID.randomUUID().toString(), BigDecimal.valueOf(100), null);
+        return new PaymentItemDomain(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString(), BigDecimal.valueOf(100), null);
     }
 }

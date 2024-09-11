@@ -4,7 +4,9 @@ import com.ruandob.challenge.domain.charge.ChargeDomain;
 import com.ruandob.challenge.domain.exceptions.NotFoundException;
 import com.ruandob.challenge.infrastructure.dataproviders.charge.entities.ChargeEntity;
 import com.ruandob.challenge.infrastructure.dataproviders.charge.mappers.ChargeDomainMapper;
+import com.ruandob.challenge.infrastructure.dataproviders.charge.mappers.ChargeDomainMapperImpl;
 import com.ruandob.challenge.infrastructure.dataproviders.charge.repositories.JpaChargeRepository;
+import com.ruandob.challenge.infrastructure.dataproviders.payment.mappers.PaymentDomainMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +22,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -31,7 +33,10 @@ class GetByIdChargeProviderTest {
     private JpaChargeRepository repository;
 
     @Spy
-    private ChargeDomainMapper mapper = Mappers.getMapper(ChargeDomainMapper.class);
+    private PaymentDomainMapper paymentDomainMapper = Mappers.getMapper(PaymentDomainMapper.class);
+
+    @Spy
+    private ChargeDomainMapper mapper = new ChargeDomainMapperImpl(paymentDomainMapper);
 
     @InjectMocks
     private GetByIdChargeProvider getByIdChargeProvider;
@@ -60,8 +65,9 @@ class GetByIdChargeProviderTest {
 
         when(repository.findById(any(UUID.class))).thenReturn(Optional.empty());
 
-        var exception = assertThrows(NotFoundException.class, () -> getByIdChargeProvider.getById(chargeId));
-        assertThat(exception.getMessage()).isEqualTo("Recurso não encontrado no sistema: cobrança");
-        verify(repository, times(1)).findById(UUID.fromString(chargeId));
+        assertThatThrownBy(() -> getByIdChargeProvider.getById(chargeId))
+                .isInstanceOf(NotFoundException.class)
+                .hasMessageContaining("cobrança")
+                .hasMessageContaining(chargeId);
     }
 }

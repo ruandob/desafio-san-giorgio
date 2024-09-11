@@ -35,8 +35,8 @@ class CreatePaymentProviderTest {
     @Test
     @DisplayName("Deve criar um pagamento com sucesso")
     void shouldCreatePaymentSuccessfully() {
-        var paymentItemDomain = new PaymentItemDomain(UUID.randomUUID().toString(), null, BigDecimal.TEN, "status");
-        var paymentEntity = new PaymentEntity(UUID.randomUUID(), BigDecimal.TEN, "status", null);
+        var paymentItemDomain = new PaymentItemDomain(UUID.randomUUID().toString(), UUID.randomUUID().toString(), null, BigDecimal.TEN, "status");
+        var paymentEntity = new PaymentEntity(UUID.randomUUID(), BigDecimal.TEN, "status", null, null);
 
         when(repository.saveAndFlush(any())).thenReturn(paymentEntity);
 

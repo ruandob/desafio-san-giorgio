@@ -18,8 +18,8 @@ public class GetAllChargeProvider implements GetAllChargeGateway {
 
     @Override
     public List<ChargeDomain> getAll() {
-        var charges = repository.findAll();
-        return charges.stream()
+        return repository.findAll()
+                .stream()
                 .map(mapper::toDomain)
                 .toList();
     }
