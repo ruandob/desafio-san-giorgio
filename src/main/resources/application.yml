@@ -14,13 +14,22 @@ spring:
     show-sql: false
   liquibase:
     change-log: classpath:db/changelog-main.json
+  cloud:
+    aws:
+      credentials:
+        access-key: accesskey
+        secret-key: secretkey
+      region:
+        static: us-east-1
+        instance-profile: true
+        profile:
+          name: localstack
+      endpoint: http://localhost:4566
+
+queueName:
+  partial: partial-payments
+  full: full-payments
+  over: over-payments
+
 server:
   port: 8080
-
-### SQS ###
-sqs:
-  url: http://localhost:4566/000000000000
-  partial-payment: ${sqs.url}/partial-payments
-  full-payment: ${sqs.url}/full-payments
-  over-payment: ${sqs.url}/over-payments
-  payment-response: ${sqs.url}/payment-responses
