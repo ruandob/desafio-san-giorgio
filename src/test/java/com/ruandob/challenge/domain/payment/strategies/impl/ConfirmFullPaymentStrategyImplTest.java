@@ -48,7 +48,7 @@ class ConfirmFullPaymentStrategyImplTest {
     @Test
     @DisplayName("Deve enviar o pagamento para o gateway com o nome da fila")
     void shouldSendPaymentToGatewayWithQueueName() {
-        var paymentItemDomain = new PaymentItemDomain("chargeId", "paymentId", BigDecimal.TEN, "status");
+        var paymentItemDomain = new PaymentItemDomain("sellerId", "chargeId", "paymentId", BigDecimal.TEN, "status");
 
         confirmFullPaymentStrategy.execute(paymentItemDomain);
         verify(gateway, times(1)).send(any(), any());

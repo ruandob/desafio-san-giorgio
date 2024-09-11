@@ -10,9 +10,11 @@ import org.mapstruct.Mapping;
 @Mapper(config = BaseConfigMapper.class)
 public interface PaymentDomainMapper extends BaseDomainMapper<PaymentItemDomain, PaymentEntity> {
 
+    @Mapping(target = "sellerId", source = "seller.id")
     @Mapping(target = "chargeId", source = "charge.id")
     PaymentItemDomain toDomain(PaymentEntity entity);
 
+    @Mapping(target = "seller.id", source = "sellerId")
     @Mapping(target = "charge.id", source = "chargeId")
     PaymentEntity toEntity(PaymentItemDomain domain);
 }

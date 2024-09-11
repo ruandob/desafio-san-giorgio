@@ -1,6 +1,7 @@
 package com.ruandob.challenge.infrastructure.dataproviders.payment.entities;
 
 import com.ruandob.challenge.infrastructure.dataproviders.charge.entities.ChargeEntity;
+import com.ruandob.challenge.infrastructure.dataproviders.seller.entities.SellerEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,6 @@ public class PaymentEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", columnDefinition = "CHAR(36)")
     private UUID id;
 
     @Column(name = "value", precision = 38, scale = 2)
@@ -37,4 +37,8 @@ public class PaymentEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "charge_id")
     private ChargeEntity charge;
+
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private SellerEntity seller;
 }
