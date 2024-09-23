@@ -19,6 +19,6 @@ public class CleanArchitectureTest {
                     .layer("infrastructure").definedBy("..infrastructure..")
                     .whereLayer("api").mayNotBeAccessedByAnyLayer()
                     .whereLayer("domain").mayOnlyBeAccessedByLayers("api", "infrastructure")
-                    .whereLayer("infrastructure").mayOnlyBeAccessedByLayers("api", "domain");
+                    .whereLayer("infrastructure").mayOnlyBeAccessedByLayers("api");
 
 }
